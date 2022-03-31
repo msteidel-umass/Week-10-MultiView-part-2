@@ -32,7 +32,7 @@
 		<table>
 			<tr>
 				<td><svg width="500px" height="150px" id="topAdelie"></svg></td>
-				<td width="10%">&nbsp</td>
+				<td width="10%"><svg class="legend" id="AdelieLegend" height="300" width="200"></svg></td>
 			</tr>
 			<tr>
 				<td>
@@ -47,7 +47,7 @@
 			</tr>
 			<tr>
 				<td><svg width="500px" height="150px" id="topGentoo"></svg></td>
-				<td width="10%">&nbsp</td>
+				<td width="10%"><svg class="legend" id="GentooLegend" height="300" width="200"></td>
 			</tr>
 			<tr>
 				<td>
@@ -62,7 +62,7 @@
 			</tr>
 			<tr>
 				<td><svg width="500px" height="150px" id="topOther"></svg></td>
-				<td width="10%">&nbsp</td>
+				<td width="10%"><svg class="legend" id="OtherLegend" height="300" width="200"></td>
 			</tr>
 			<tr>
 				<td>
@@ -108,9 +108,58 @@
 				.attr("height", "100%");
 
 			function main(data) {
-				let = Adelie = [];
-				let = Gentoo = [];
-				let = Other = [];
+				function addLegend(id) {
+					var svg = d3.select("#" + id);
+
+					svg.append("circle")
+						.attr("cx", 50)
+						.attr("cy", 130)
+						.attr("r", 6)
+						.style("fill", "steelblue");
+					svg.append("circle")
+						.attr("cx", 50)
+						.attr("cy", 160)
+						.attr("r", 6)
+						.style("fill", "rgb(118, 86, 111)");
+					svg.append("circle")
+						.attr("cx", 50)
+						.attr("cy", 190)
+						.attr("r", 6)
+						.style("fill", "brown");
+					svg.append("text")
+						.attr("x", 50)
+						.attr("y", 100)
+						.text("Islands")
+						.style("font-size", "15px")
+						.attr("alignment-baseline", "middle");
+					svg.append("text")
+						.attr("x", 60)
+						.attr("y", 130)
+						.text("Torgersen")
+						.style("font-size", "15px")
+						.attr("alignment-baseline", "middle");
+					svg.append("text")
+						.attr("x", 60)
+						.attr("y", 160)
+						.text("Biscoe")
+						.style("font-size", "15px")
+						.attr("alignment-baseline", "middle");
+
+					svg.append("text")
+						.attr("x", 60)
+						.attr("y", 190)
+						.text("Dream")
+						.style("font-size", "15px")
+						.attr("alignment-baseline", "middle");
+				}
+
+				addLegend("AdelieLegend");
+				addLegend("GentooLegend");
+				addLegend("OtherLegend");
+
+				let Adelie = [];
+				let Gentoo = [];
+				let Other = [];
 
 				let culmen_length_mm = d3.map(data, function (d) {
 					if (d.species == "Adelie") {
@@ -153,7 +202,7 @@
 					islands = d.island;
 					if (islands === "Torgersen") {
 						return 0;
-					} else if (species === "Biscoe") {
+					} else if (islands === "Biscoe") {
 						return 1;
 					} else {
 						return 2;
